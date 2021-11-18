@@ -11,6 +11,7 @@ input TodoInput {
 }
 
 type Query {
+  todo(filter: TodoInput): [Todo]
   todos: [Todo]
 }
 

@@ -1,14 +1,25 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
+import { BaseRedisCache } from 'apollo-server-cache-redis';
+import Redis from 'ioredis';
 import cors from 'cors';
 import schema from './schema';
 import dotenv from 'dotenv'
 dotenv.config()
 
+
 // setup
 const app = express();
-const api = new ApolloServer({ schema });
+const api = new ApolloServer({ 
+    schema,
+    persistedQueries: {
+        ttl: 15,
+        cache: new BaseRedisCache({
+          client: new Redis()
+        }),
+      } 
+});
 const PORT = process.env.PORT || 5000;
 
 (async function startAPI() {
@@ -19,6 +30,7 @@ const PORT = process.env.PORT || 5000;
 
 (async function startMongoDB() {
     await mongoose.connect('mongodb://localhost:27017/todo');
+    mongoose.set('debug', true);
     console.log('mongoDB started...');
 } ());
 

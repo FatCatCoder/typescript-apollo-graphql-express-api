@@ -5,9 +5,13 @@ import { Todo as TodoModel } from './models/models';
 
 const resolverMap: IResolvers = {
   Query: {
+    todo: async (_, args): Promise<Array<TodoInterface>> => {
+      const { filter } = args;
+      const todo = await TodoModel.find(filter);
+      return todo;
+  },
     todos: async (): Promise<Array<TodoInterface>> => {
         const allTodos = await TodoModel.find();
-        console.log(allTodos);
         return allTodos;
     },
   },

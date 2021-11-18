@@ -8,4 +8,5 @@ const todoSchema = new Schema<TodoInterface>({
     {collection: "todos", versionKey: false} // no __v added anymore
 );
 
+
 export const Todo = model<TodoInterface>('todo', todoSchema);

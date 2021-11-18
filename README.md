@@ -8,9 +8,9 @@ Keeping things clean and headache free
 - Apollo-Server-Express
 - GraphQL
 - MongoDB (+ Mongoose ORM)
+- Redis
 ### Future
 - PostgreSQL (+ Prisma ORM || TypeORM)
-- Redis
 - Jest
 - Cypress
 - Sister Front-End with React
